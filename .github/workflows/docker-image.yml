@@ -32,7 +32,7 @@ jobs:
         run: docker build -t manudev1995/graphql-practices:1.0.1 .
 
       - name: Push Docker Image
-        run: docker push manudev1995/graphql-practices:1.0.1 .
+        run: docker push manudev1995/graphql-practices:1.0.1
 
     
 #    - name: Build the Docker image
