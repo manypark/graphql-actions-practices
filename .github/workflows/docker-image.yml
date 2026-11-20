@@ -35,7 +35,7 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASS }}
         run: |
           echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
-          
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -43,12 +43,9 @@ jobs:
         env:
           NEW_VERSION: ${{steps.version.outputs.version}}
         run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -t manudev1995/docker-graphql:$NEW_VERSION .
-          docker buildx build --platform linux/amd64,linux/arm64 -t manudev1995/docker-graphql:latest .
-
-      - name: Push Docker Image
-        env:
-            NEW_VERSION: ${{steps.version.outputs.version}}
-        run: | 
-          docker push manudev1995/docker-graphql:$NEW_VERSION
-          docker push manudev1995/docker-graphql:latest
+          docker buildx build \
+          --platform linux/amd64,linux/arm64 \
+          -t manudev1995/docker-graphql:$NEW_VERSION \
+          -t manudev1995/docker-graphql:latest \
+          --push \
+          .
