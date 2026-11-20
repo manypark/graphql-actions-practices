@@ -2,7 +2,7 @@
 FROM node:19-alpine3.15 AS dev-deps
 WORKDIR /app
 COPY package.json package.json
-RUN yarn install
+RUN yarn install --frozen-lockfile
 
 
 FROM node:19-alpine3.15 AS builder
@@ -15,7 +15,7 @@ RUN yarn build
 FROM node:19-alpine3.15 AS prod-deps
 WORKDIR /app
 COPY package.json package.json
-RUN yarn install --prod
+RUN yarn install --prod --frozen-lockfile
 
 
 FROM node:19-alpine3.15 AS prod
