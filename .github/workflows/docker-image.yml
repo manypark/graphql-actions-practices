@@ -29,10 +29,14 @@ jobs:
           echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
 
       - name: Build Docker Image
-        run: docker build -t manudev1995/docker-graphql:1.0.1 .
+        run: |
+          docker build -t manudev1995/docker-graphql:1.0.1 .
+          docker build -t manudev1995/docker-graphql:latest .
 
       - name: Push Docker Image
-        run: docker push manudev1995/docker-graphql:1.0.1
+        run: | 
+          docker push manudev1995/docker-graphql:1.0.1
+          docker push manudev1995/docker-graphql:latest
 
     
 #    - name: Build the Docker image
